@@ -14,34 +14,13 @@ export default function BudgetPage() {
 		generateBudget([]);
 	}, []);
 
-	if (loading) return <div>Loading budget...</div>;
-	if (!budget) return <div>No budget generated yet.</div>;
+	if (loading) return <div className="text-center py-8 text-indigo-600">Loading budget...</div>;
+	if (!budget)
+		return <div className="text-center py-8 text-gray-400">No budget generated yet.</div>;
 
 	return (
-		<div>
+		<div className="flex flex-col items-center justify-center min-h-[70vh] px-2 py-4 gap-6">
 			<BudgetEditor budget={budget} onUpdate={updateCategory} />
-			<div className="flex gap-2 mt-4">
-				<button
-					className="px-3 py-2 bg-indigo-500 text-white rounded"
-					onClick={() => router.push("/alerts")}>
-					Alerts
-				</button>
-				<button
-					className="px-3 py-2 bg-indigo-500 text-white rounded"
-					onClick={() => router.push("/duplicates")}>
-					Duplicates
-				</button>
-				<button
-					className="px-3 py-2 bg-indigo-500 text-white rounded"
-					onClick={() => router.push("/investments")}>
-					Investments
-				</button>
-				<button
-					className="px-3 py-2 bg-indigo-500 text-white rounded"
-					onClick={() => router.push("/accessibility")}>
-					Accessibility
-				</button>
-			</div>
 		</div>
 	);
 }
