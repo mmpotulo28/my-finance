@@ -8,7 +8,7 @@ export default function InvestmentsPage() {
 
 	useEffect(() => {
 		// Simulate profile for suggestions
-		fetchSuggestions({});
+		fetchSuggestions();
 	}, []);
 
 	if (loading) return <div>Loading investment suggestions...</div>;
