@@ -28,14 +28,14 @@ export default function BudgetPage() {
 					</div>
 					<ul className="w-full text-sm text-gray-600 dark:text-gray-300 mt-2 flex flex-col gap-1">
 						{steps.map((step, idx) => (
-							<li key={idx} className="animate-pulse">{step}</li>
+							<li key={idx} className="animate-pulse">
+								{step}
+							</li>
 						))}
 					</ul>
 				</div>
 			)}
-			{!loading && budget ? (
-				<BudgetEditor budget={budget} onUpdate={updateCategory} />
-			) : null}
+			{!loading && budget ? <BudgetEditor budget={budget} onUpdate={updateCategory} /> : null}
 			{!loading && !budget && (
 				<div className="text-center py-8 text-gray-400">No budget generated yet.</div>
 			)}
