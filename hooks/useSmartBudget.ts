@@ -21,7 +21,7 @@ export function useSmartBudget() {
 		setBudget(null);
 		setProgress(0);
 		setSteps([]);
-		let builtCategories: BudgetCategory[] = [];
+		const builtCategories: BudgetCategory[] = [];
 		let total = 0;
 
 		for (let i = 0; i < categories.length; i++) {

@@ -9,11 +9,11 @@ export default function AdvicePage() {
 	const router = useRouter();
 
 	useEffect(() => {
-		fetchAdvice([]);
+		fetchAdvice();
 	}, []);
 
 	const handleRegenerate = () => {
-		fetchAdvice([]);
+		fetchAdvice();
 	};
 
 	if (loading) return <div className="text-center py-8 text-indigo-600">Loading advice...</div>;

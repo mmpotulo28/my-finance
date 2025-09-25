@@ -11,7 +11,7 @@ export default function TransactionsPage() {
 	useEffect(() => {
 		// Simulate file analysis on mount
 		// Replace with actual file from upload context
-		analyze(new File([], "statement.csv"));
+		analyze();
 	}, []);
 
 	return (

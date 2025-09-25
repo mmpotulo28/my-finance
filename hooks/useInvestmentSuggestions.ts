@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import { InvestmentSuggestion } from "@/types/investment";
@@ -11,7 +12,7 @@ export function useInvestmentSuggestions() {
 	const [suggestions, setSuggestions] = useState<InvestmentSuggestion[]>([]);
 	const [loading, setLoading] = useState(false);
 
-	const fetchSuggestions = async (profile: any) => {
+	const fetchSuggestions = async () => {
 		setLoading(true);
 		try {
 			const { data, error } = await supabase.from("investment_suggestions").select("*");

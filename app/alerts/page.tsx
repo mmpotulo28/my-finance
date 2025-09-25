@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { AlertBanner } from "@/components/AlertBanner";
 import { useSuspiciousAlerts } from "@/hooks/useSuspiciousAlerts";

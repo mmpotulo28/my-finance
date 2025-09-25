@@ -39,7 +39,7 @@ export function useBankStatementUpload() {
 			setSummary(
 				`Highest expense: ${highExpense.description} (R ${highExpense.amount}) in ${highExpense.category}.`,
 			);
-		} catch (e: any) {
+		} catch (e: string | unknown) {
 			setError("Upload or transcription failed");
 		} finally {
 			setLoading(false);
