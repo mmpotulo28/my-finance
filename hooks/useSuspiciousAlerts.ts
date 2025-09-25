@@ -8,7 +8,7 @@ export function useSuspiciousAlerts() {
 
 	const fetchAlerts = async () => {
 		setLoading(true);
-		// Dummy data
+		await new Promise((resolve) => setTimeout(resolve, 800)); // Simulate delay
 		setAlerts([
 			{
 				id: "1",

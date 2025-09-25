@@ -6,9 +6,9 @@ export function useFinancialAdvice() {
 	const [advice, setAdvice] = useState<Advice | null>(null);
 	const [loading, setLoading] = useState(false);
 
-	const fetchAdvice = async (transactions: any) => {
+	const fetchAdvice = async () => {
 		setLoading(true);
-		// Dummy data
+		await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate delay
 		setAdvice({
 			message: "Based on your recent spending, here are some recommendations:",
 			recommendations: [

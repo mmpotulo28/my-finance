@@ -1,61 +1,43 @@
 "use client";
 import { useState } from "react";
 import { DuplicateTransaction } from "@/types/duplicate";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export function useDuplicateTransactions() {
 	const [duplicates, setDuplicates] = useState<DuplicateTransaction[]>([]);
 	const [loading, setLoading] = useState(false);
 
-	const fetchDuplicates = async () => {
+	const fetchDuplicates = async (userId?: string) => {
 		setLoading(true);
-		// Dummy data
-		setDuplicates([
-			{
-				id: "d1",
-				originalId: "t1",
-				date: "2024-06-01",
-				description: "Coffee Shop",
-				amount: 25,
-				confirmed: false,
-			},
-			{
-				id: "d2",
-				originalId: "t2",
-				date: "2024-06-02",
-				description: "Grocery Store",
-				amount: 120,
-				confirmed: false,
-			},
-			{
-				id: "d3",
-				originalId: "t3",
-				date: "2024-06-03",
-				description: "Online Subscription",
-				amount: 15,
-				confirmed: false,
-			},
-			{
-				id: "d4",
-				originalId: "t4",
-				date: "2024-06-04",
-				description: "Taxi Ride",
-				amount: 40,
-				confirmed: false,
-			},
-			{
-				id: "d5",
-				originalId: "t5",
-				date: "2024-06-05",
-				description: "Restaurant",
-				amount: 60,
-				confirmed: false,
-			},
-		]);
+		try {
+			if (userId) {
+				const { data, error } = await supabase
+					.from("duplicates")
+					.select("*")
+					.eq("user_id", userId)
+					.order("date", { ascending: false });
+				if (error) throw error;
+				setDuplicates(data || []);
+			} else {
+				setDuplicates([]);
+			}
+		} catch (e: any) {
+			setDuplicates([]);
+		}
 		setLoading(false);
 	};
 
-	const confirmDuplicate = (id: string) => {
-		setDuplicates((ds) => ds.map((d) => (d.id === id ? { ...d, confirmed: true } : d)));
+	const confirmDuplicate = async (id: string) => {
+		setLoading(true);
+		try {
+			await supabase.from("duplicates").update({ confirmed: true }).eq("id", id);
+			setDuplicates((ds) => ds.map((d) => (d.id === id ? { ...d, confirmed: true } : d)));
+		} catch (e) {}
+		setLoading(false);
 	};
 
 	return { duplicates, loading, fetchDuplicates, confirmDuplicate };
